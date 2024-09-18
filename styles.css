@@ -871,11 +871,11 @@ button.prev-day, button.next-day {
     .exercise-description,
     .exercise-content,
     .exercise-explanation {
-        font-size: 14px; /* Adjust font size for smaller screens */
+        font-size: 9px; /* Adjust font size for smaller screens */
     }
 
     .math-expression {
-        font-size: 14px; /* Adjust font size for smaller screens */
+        font-size: 9px; /* Adjust font size for smaller screens */
     }
 }
 
