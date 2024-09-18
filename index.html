@@ -97,180 +97,173 @@
             <a href="#subject-homework" class="button"><h3>P/u acasa toate obiectele</h3></a>
         </div>
     </section>
-        <section id="orar">
-            <div id="orar-teme">
-                <div class="orar-nav">
-                    <button class="prev-day">❮</button>
-                    <h2 id="current-day">LUNI</h2>
-                    <button class="next-day">❯</button>
-                </div>
-                <div class="orar-content">
-                    <ul id="orar-list">
-                        <li>1. L. rusă / Cabinet : 122</li>
-                        <li>2. Ed. p/u societate / Cabinet : 223</li>
-                        <li>3. Chimia / Cabinet : 325</li>
-                        <li>4. Fizica / Cabinet : 325 </li>
-                        <li>5. L. română / Cabinet : 329</li>
-                        <li>6. L. română / Cabinet : 329 </li>
-                    </ul>
-                </div>
+    <section id="orar">
+        <div id="orar-teme">
+            <h2>Orarul nu este 100% precis la moment din cauza schimbarii. </h2>
+            <div class="orar-nav">
+                <button class="prev-day">❮</button>
+                <h2 id="current-day">LUNI</h2>
+                <button class="next-day">❯</button>
             </div>
-            
-            <div id="orar-sunete">
-                <h2>Orarul Sunetelor</h2>
-                <ul>
-                    <li>Prima lectie: 8:15-9:00 AM</li>
-                    <li>A doua lectie: 9:10-9:55 AM</li>
-                    <li>A treia lectie: 10:05-10:50 AM</li>
-                    <li>A patra lectie: 11:10-11:55 AM</li>
-                    <li>A cincea lectie: 12:05-12:50 AM</li>
-                    <li>A sasea lectie: 13:00-13:45 PM</li>
-                    <h3>Noi nu avem mai mult de 6 lectii :))</h3>
+            <div class="orar-content">
+                <ul id="orar-list">
+                    <li>1. Geografie / Cabinet : 125</li>
+                    <li>2. Biologie / Cabinet : 324</li>
+                    <li>3. L. Română / Cabinet : 329</li>
+                    <li>4.  Ed. fizică / Cabinet : Gym </li>
+                    <li>5. Fizica / Cabinet : 325</li>
+                    <li>6. L. rusă / Cabinet : - </li>
                 </ul>
             </div>
-        </section>
-        <script>
-            const days = {
-                "LUNI": [
-                    "1. L. rusă / Cabinet : 122",
-                    "2. Ed. p/u societate / Cabinet : 223",
-                    "3. Chimia / Cabinet : 325",
-                    "4. Fizica / Cabinet : 325",
-                    "5. L. română / Cabinet : 329",
-                    "6. L. română / Cabinet : 329"
-                ],
-                "MARTI": [
-                    "1. Informatica / Cabinet : 222/235",
-                    "2. Matematica / Cabinet : 124",
-                    "3. Matematica aplicată / Cabinet : 222/235",
-                    "4. Limba engleza / Cabinet : 139/329",
-                    "5. Geografia / Cabinet : 125",
-                    "6. Ed fizică"
-                ],
-                "MIERCURI": [
-                    "1. Biologia / Cabinet : 324",
-                    "2. Fizica / Cabinet : 325",
-                    "3. Ed fizică",
-                    "4. Matematica / Cabinet : 121",
-                    "5. Ed tehnologică",
-                    "6. L. română / Cabinet : 329"
-                ],
-                "JOI": [
-                    "1. Istoria / Cabinet : 121",
-                    "2. L. română / Cabinet : 329",
-                    "3. Limba engleză / Cabinet : 139/329",
-                    "4. Matematica / Cabinet : 227",
-                    "5. Chimia / Cabinet : 325"
-                ],
-                "VINERI": [
-                    "1. L. rusă / Cabinet : 224",
-                    "2. Biologia / Cabinet : 324",
-                    "3. Matematica / Cabinet : 327",
-                    "4. L. română / Cabinet : 329",
-                    "5. Istoria / Cabinet : 121",
-                    "6. Dezv. Personala / Cabinet : 329"
-                ]
-            };
+        </div>
         
-            let currentDayIndex = 0;
-            const dayNames = Object.keys(days);
-        
-            function updateDay() {
-                const currentDay = dayNames[currentDayIndex];
-                document.getElementById('current-day').textContent = currentDay;
-                const list = document.getElementById('orar-list');
-                
-                
-                list.classList.remove('show');
-                setTimeout(() => {
-                    list.innerHTML = days[currentDay].map(item => `<li>${item}</li>`).join('');
-                    list.classList.add('show');
-                }, 300); 
-            }
-        
-            document.querySelector('.prev-day').addEventListener('click', function() {
-                currentDayIndex = (currentDayIndex - 1 + dayNames.length) % dayNames.length;
-                updateDay();
-            });
-        
-            document.querySelector('.next-day').addEventListener('click', function() {
-                currentDayIndex = (currentDayIndex + 1) % dayNames.length;
-                updateDay();
-            });
-        
-          
+        <div id="orar-sunete">
+            <h2>Orarul Sunetelor</h2>
+            <ul>
+                <li>Prima lectie: 8:15-9:00 AM</li>
+                <li>A doua lectie: 9:10-9:55 AM</li>
+                <li>A treia lectie: 10:05-10:50 AM</li>
+                <li>A patra lectie: 11:10-11:55 AM</li>
+                <li>A cincea lectie: 12:05-12:50 AM</li>
+                <li>A sasea lectie: 13:00-13:45 PM</li>
+                <h3>Noi nu avem mai mult de 6 lectii :))</h3>
+            </ul>
+        </div>
+    </section>
+    <script>
+       const days = {
+"LUNI": [
+    "1. Geografie / Cabinet : 125",
+    "2. Biologie / Cabinet : 324",
+    "3. L. Română / Cabinet : 329",
+    "4. Ed. fizică / Cabinet : Gym",
+    "5. Fizica / Cabinet : 325",
+    "6. L. rusă / Cabinet : 122"
+],
+"MARTI": [
+    "1. Matematica / Cabinet : 121",
+    "2. Matematica aplicată / Cabinet : 222/235",
+    "3. Ed. tehnologică / Cabinet : 227",
+    "4. Chimia / Cabinet : 325",
+    "5. L. engleză / Cabinet : 139/329",
+    "6. Informatica / Cabinet : 222/235"
+],
+"MIERCURI": [
+    "1. L. Română / Cabinet : 329",
+    "2. L. Română / Cabinet : 329",
+    "3. Istoria / Cabinet : 121",
+    "4. Matematica / Cabinet : 121",
+    "5. L. rusă / Cabinet : 122"
+],
+"JOI": [
+    "1. Matematica / Cabinet : 121",
+    "2. Biologie / Cabinet : 324",
+    "3. L. Română / Cabinet : 329",
+    "4. Ed. p/u societate / Cabinet : 223",
+    "5. L. engleză / Cabinet : 139/329",
+    "6. Dezvoltare personală / Cabinet : 329"
+],
+"VINERI": [
+    "1. Matematica / Cabinet : 121",
+    "2. Chimia / Cabinet : 325",
+    "3. Ed. fizică / Cabinet : Gym",
+    "4. Istoria / Cabinet : 121",
+    "5. L. Română / Cabinet : 329",
+    "6. Fizica / Cabinet : 325"
+]
+};
+
+    
+        let currentDayIndex = 0;
+        const dayNames = Object.keys(days);
+    
+        function updateDay() {
+            const currentDay = dayNames[currentDayIndex];
+            document.getElementById('current-day').textContent = currentDay;
+            const list = document.getElementById('orar-list');
+            
+            
+            list.classList.remove('show');
+            setTimeout(() => {
+                list.innerHTML = days[currentDay].map(item => `<li>${item}</li>`).join('');
+                list.classList.add('show');
+            }, 300); 
+        }
+    
+        document.querySelector('.prev-day').addEventListener('click', function() {
+            currentDayIndex = (currentDayIndex - 1 + dayNames.length) % dayNames.length;
             updateDay();
-        </script>
-        
-        
+        });
+    
+        document.querySelector('.next-day').addEventListener('click', function() {
+            currentDayIndex = (currentDayIndex + 1) % dayNames.length;
+            updateDay();
+        });
+    
+      
+        updateDay();
+    </script>
     
     
 
-        <section id="homework-tomorrow">
-            <h2>Pentru acasa Maine</h2>
-            <p id="homework-date">Maine este: [Marti]</p>
-            <li>Datele nu sunt 100% precise!</li>
-            <ul>
-                <li><h3>1. Informatica</h3>Grupa 1: Videoclipurile de pe classroom / Grupa 2: De studiat tema la p 16 ex 5 p 20 </li>
-                <li><h3>2. Matematica</h3> Caietul de teste , testele 16,18,24 de facut ex 5.</li>
-                <li><h3>3. Mate app.</h3> de luat caietul de teste</li>
-                <li><h3>4. L. Engleza</h3> Grupa D.Natalia: ex 4 p 10 OR 10 p 12  |  Grupa D.Angela Mottoul si vocabularul de scris / ex 4 p 13</li>
-                <li><h3>5. Geografie</h3> EEx 4,5 p 14</li>
-                <li><h3>6. Ed. fizica</h3> forma sportiva</li>
-            </ul>
-        </section>
- 
-        
-
-        <section id="subject-homework">
-            <h2>Pentru Acasa - Mereu</h2>
-            <p>Tema p/u acasa la fiecare obiect</p>
-            <li>! ULTIMA DATA ACTUALIZAT - 16/09/2024 !</li>
-            <li> Datele vor fi actualizate din nou Marti la ora 3</li>
-            <ul>
-                <li><h3>Matematica:</h3> Caietul de teste , testele 16,18,24 de facut ex 5.</li>
-                <li><h3>L. Romana:</h3> Ex 2,3 p 9 sus / ex 6 oral</li>
-                <li><h3>L. Rusa:</h3> Poezie-Pagina 6 de invatat (VINERI)</li>
-                <li><h3>L. Engleza:</h3> Grupa D.Natalia: ex 4 p 10 OR 10 p 12  |  Grupa D.Angela Mottoul si vocabularul de scris / ex 4 p 13</li>
-                <li><h3>Istorie:</h3> Romania in primul razboi mondial, p 13  / axa </li>
-                <li><h3>Biologie:</h3> Continuam desenul din manualul online p 8 / Descrierea in imaginea trimisa pe 16/09 ora 2:41. Scriem doar de la aliniate.</li>
-                <li><h3>Chimie:</h3> De terminat problema care am inceputo in clasa / Si la alegere problema 2 p 19</li>
-                <li><h3>Fizica:</h3> De transcris pozele de pe viber in caiet / pozele trimise luni la 11:55 </li>
-                <li><h3>Geografie:</h3> Ex 4,5 p 14</li>
-                <li><h3>Mate App.:</h3> De luat caietul de teste</li>
-                <li><h3>Ed. fizica:</h3> Forma sportiva</li>
-                <li><h3>Ed. teh.:</h3> Baieti: nimic / Fete: nu stiu, sorry.</li>
-                <li><h3>Ed. Civica:</h3> GRUPA 1-6(Citim textul trimis pe viber si criticam in scris / GRUPA 2-3(Citim textul si suntem obiectivi in scris) / GRUPA 4-5(Citim textul si facem teori conspirative in scris) </li>
-                <li><h3>Informatica</h3> Grupa 1: Videoclipurile de pe classroom / Grupa 2: De studiat tema la p 16 , ex 5 p 20</li>
-            </ul>
-        </section>
 
 
+    <section id="homework-tomorrow">
+        <h2>Pentru acasa Maine</h2>
+        <p id="homework-date">Maine este: [Joi]</p>
+        <li>Datele nu sunt 100% precise!</li>
+        <ul>
+            <li><h3>1. Matematica:</h3>MAINE TEST. Voi scrie informatii acus.</li>
+            <li><h3>2. Biologie:</h3> Continuam desenul din manualul online p 8 / Descrierea in imaginea trimisa pe 16/09 ora 2:41. Scriem doar de la aliniate.</li>
+            <li><h3>3. L. Romana:</h3> ex 1 p 9 compunere de o pagina</li>
+            <li><h3>4. Ed. Civica:</h3> GRUPA 1-6(Citim textul trimis pe viber si criticam in scris / GRUPA 2-3(Citim textul si suntem obiectivi in scris) / GRUPA 4-5(Citim textul si facem teori conspirative in scris) </li>
+            <li><h3>5. L. Engleza:</h3> Grupa D.Natalia: ex 9 p 15 / ex 12 p 15 / repetam grammar |  Grupa D.Angela: Vocabularul de repetat , ex 5,6 p 14</li>
+            <li><h3>6. Dez. Personala:</h3> Nimic</li>
+        </ul>
+    </section>
+    
+    
 
-        <section id="math-exercise">
-            <h1>Math</h1>
-            <div class="exercise-nav">
-                
-                <button class="prev-exercise">❮</button>
-                
-                <h2 id="exercise-title">Exercițiu 1</h2>
-                <button class="next-exercise">❯</button>
-            </div>
-            <div id="exercise-content">
-                <p id="exercise-description">Niciun item rezolvat încă!</p>
-                <!-- Exercise content will be injected here by JavaScript -->
-            </div>
-        </section>
+    <section id="subject-homework">
+        <h2>Pentru Acasa - Mereu</h2>
+        <p>Tema p/u acasa la fiecare obiect</p>
+        <li>! ULTIMA DATA ACTUALIZAT - 18/09/2024 !</li>
+        <li> Datele vor fi actualizate din nou Joi la ora 3</li>
+        <ul>
+           <li><h3>Matematica:</h3>MAINE TEST. Voi scrie informatii acus.</li>
+            <li><h3>L. Romana:</h3> ex 1 p 9 compunere de o pagina</li>
+            <li><h3>L. Rusa:</h3> ex 4 p 14</li>
+            <li><h3>L. Engleza:</h3> Grupa D.Natalia: ex 9 p 15 / ex 12 p 15 / repetam grammar |  Grupa D.Angela: Vocabularul de repetat , ex 5,6 p 14</li>
+            <li><h3>Istorie:</h3>3 caracteristici la 3 personalitati : Elena Alistar / Regele Ferdinand / Regina Maria</li>
+            <li><h3>Istorie:</h3>Marti: Text argumentativ p 16 unltimul punct de jos</li>
+            <li><h3>Biologie:</h3> Continuam desenul din manualul online p 8 / Descrierea in imaginea trimisa pe 16/09 ora 2:41. Scriem doar de la aliniate.</li>
+            <li><h3>Chimie:</h3>Cu ajutorul tabelului care lam scris in caiet, la p 16 facem exerciții din evaluare</li>
+            <li><h3>Fizica:</h3> De transcris pozele de pe viber in caiet / pozele trimise luni la 11:55 </li>
+            <li><h3>Geografie:</h3> Ex 4,5 p 14</li>
+            <li><h3>Mate App.:</h3> De luat caietul de teste</li>
+            <li><h3>Ed. fizica:</h3> Forma sportiva</li>
+            <li><h3>Ed. teh.:</h3> Baieti: nimic / Fete: nu stiu, sorry.</li>
+            <li><h3>Ed. Civica:</h3> GRUPA 1-6(Citim textul trimis pe viber si criticam in scris / GRUPA 2-3(Citim textul si suntem obiectivi in scris) / GRUPA 4-5(Citim textul si facem teori conspirative in scris) </li>
+            <li><h3>Informatica</h3> Grupa 1: Videoclipurile de pe classroom/ de studiat temele / Grupa 2: nimic</li>
+            <li><h3> Dez. Personala:</h3> Nimic</li>
+        </ul>
+    </section>
+
+  
+    
+
+     
         
         
         <div id="popup" class="bookmark-popup">
             <div class="bookmark-content">
-                <span class="close-btn">&times;</span>
-                <h2>Ce este nou?</h2>
-                <p>Mate exercitii</p>
+                <h2>ATENȚIE!</h2>
+                <p>Maine test la matematica</p>
+                <button class="close-btn">Șterge</button> 
             </div>
             <span class="bookmark-label">Nou!</span>
         </div>
+        
         
         
         
