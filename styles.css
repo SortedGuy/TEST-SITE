@@ -801,3 +801,64 @@ button.prev-day, button.next-day {
 
 
 
+/* General styling for the section */
+#test-help {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    font-family: Arial, sans-serif;
+}
+
+#test-help h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #f1c40f;
+}
+
+.exercise {
+    margin-bottom: 20px;
+}
+
+.exercise h2 {
+    font-size: 20px;
+    color: #f39c12;
+}
+
+.exercise-description {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #e0e0e0;
+}
+
+.exercise-content {
+    font-size: 16px;
+    color: #e0e0e0;
+    margin-bottom: 10px;
+}
+
+.math-expression {
+    color: #f39c12;
+    font-weight: bold;
+}
+
+.exercise-explanation {
+    font-size: 16px;
+    color: #e0e0e0;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    #test-help {
+        padding: 10px;
+    }
+
+    #test-help h1 {
+        font-size: 20px;
+    }
+
+    .exercise h2 {
+        font-size: 18px;
+    }
+}
