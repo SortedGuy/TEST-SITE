@@ -83,7 +83,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const problemInput = document.getElementById("problem-input");
     const problemsList = document.getElementById("problems-list");
 
-   
     const encodedPassword = "bWF0ZW9r"; 
     const adminPassword = atob(encodedPassword); 
 
@@ -96,20 +95,16 @@ document.addEventListener("DOMContentLoaded", function() {
     // Load existing problems from local storage
     const loadProblems = () => {
         const problems = JSON.parse(localStorage.getItem("problems")) || [];
-        const today = getTodayDate();
-
-        // Filter problems submitted today
-        const todayProblems = problems.filter(problem => problem.date === today);
         
-        problemsList.innerHTML = todayProblems.map((problem, index) => `
+        problemsList.innerHTML = problems.map((problem, index) => `
             <div class="problem">
-                <strong>Question:</strong> ${problem.question}<br>
-                <strong>Response:</strong> ${problem.response || 'Pending...'}<br>
-                <input type="password" class="password-input" placeholder="Enter password to respond..." />
-                <input type="text" class="response-input" placeholder="Type your response..." data-index="${index}" />
-                <button class="submit-response">Submit Response</button>
-                <input type="password" class="delete-password-input" placeholder="Enter password to delete..." />
-                <button class="delete-button" data-index="${index}">Delete</button>
+                <strong>Întrebare:</strong> ${problem.question}<br>
+                <strong>Răspuns:</strong> ${problem.response || 'În așteptare...'}<br>
+                <input type="password" class="password-input" placeholder="Introduceți parola pentru a răspunde..." />
+                <input type="text" class="response-input" placeholder="Scrieți răspunsul dumneavoastră..." data-index="${index}" />
+                <button class="submit-response">Trimite răspunsul</button>
+                <input type="password" class="delete-password-input" placeholder="Introduceți parola pentru a șterge..." />
+                <button class="delete-button" data-index="${index}">Șterge</button>
             </div>
         `).join('');
 
@@ -130,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     localStorage.setItem("problems", JSON.stringify(problems));
                     loadProblems(); // Refresh the list
                 } else {
-                    alert("Incorrect password or empty response.");
+                    alert("Parolă incorectă sau răspuns gol.");
                 }
             });
         });
@@ -149,7 +144,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     localStorage.setItem("problems", JSON.stringify(problems));
                     loadProblems(); // Refresh the list
                 } else {
-                    alert("Incorrect password for deletion.");
+                    alert("Parolă incorectă pentru ștergere.");
                 }
             });
         });
@@ -158,19 +153,18 @@ document.addEventListener("DOMContentLoaded", function() {
     // Save problem
     submitButton.addEventListener("click", function() {
         const question = problemInput.value.trim();
-        const today = getTodayDate();
         const problems = JSON.parse(localStorage.getItem("problems")) || [];
-        const todayProblemsCount = problems.filter(problem => problem.date === today).length;
+        const todayProblemsCount = problems.filter(problem => problem.date === getTodayDate()).length;
 
         if (todayProblemsCount < 5) {
             if (question) {
-                problems.push({ question: question, response: '', date: today });
+                problems.push({ question: question, response: '', date: getTodayDate() });
                 localStorage.setItem("problems", JSON.stringify(problems));
                 problemInput.value = ''; // Clear input
                 loadProblems(); // Refresh the list
             }
         } else {
-            alert("You can only submit 5 questions per day.");
+            alert("Puteți trimite doar 5 întrebări pe zi.");
         }
     });
 
