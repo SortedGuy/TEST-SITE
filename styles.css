@@ -879,38 +879,45 @@ button.prev-day, button.next-day {
     }
 }
 
-
+/* Collapsible Button Style */
 .collapsible {
-    background-color: #1a1a1a; /* Dark background for the button */
-    color: #fff; /* White text color */
-    cursor: pointer;
-    padding: 8px; /* Smaller padding for a more compact button */
-    border: none;
-    text-align: center; /* Center align text */
-    outline: none;
-    font-size: 14px; /* Smaller font size */
-    border-radius: 5px; /* Rounded corners */
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
-    width: 200px; /* Fixed width for a consistent button size */
-    margin: 10px auto; /* Center the button horizontally */
+    background-color: #5a5a5a; /* Slightly lighter background */
+    color: white;              /* White text */
+    cursor: pointer;           /* Pointer cursor on hover */
+    padding: 8px 16px;        /* Padding for the button */
+    width: auto;               /* Auto width for smaller buttons */
+    margin: 10px auto;        /* Center the button with margin */
+    border: none;             /* No border */
+    text-align: center;       /* Center text */
+    outline: none;            /* No outline */
+    font-size: 14px;          /* Slightly smaller font size */
+    border-radius: 5px;       /* Rounded corners */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
 }
 
 .collapsible:hover {
-    background-color: #333; /* Darker shade on hover */
+    background-color: #6a6a6a; /* Lighter background on hover */
+    transform: scale(1.05);    /* Slight scale effect on hover */
 }
 
-.content {
-    padding: 15px; /* Padding for content */
-    display: none; /* Hidden by default */
-    background-color: #2e2e2e; /* Darker background for the content */
-    border-radius: 5px; /* Rounded corners */
-    color: #fff; /* White text color */
-    margin-top: 5px; /* Spacing between button and content */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+/* Content Style */
+.exercise-content {
+    padding: 15px;             /* Padding inside the content */
+    display: none;             /* Hidden by default */
+    overflow: hidden;          /* Hide overflow */
+    background-color: #222;    /* Darker background for content */
+    color: white;              /* White text */
+    border: 1px solid #444;    /* Border for separation */
+    border-radius: 5px;        /* Rounded corners */
+    margin: 10px auto;        /* Center the content block */
+    max-width: 800px;         /* Max width for content */
 }
 
-hr {
-    border: 0; /* Remove default border */
-    border-top: 1px solid #444; /* Add a top border with a dark color */
-    margin: 15px 0; /* Margin above and below the line */
+/* Math Expressions Style */
+.math-expression {
+    font-family: 'Courier New', monospace; /* Monospace font for math expressions */
+    background-color: #333; /* Background for better visibility */
+    padding: 5px;          /* Padding around the expression */
+    border-radius: 5px;    /* Rounded corners */
+    display: inline-block;  /* Make it inline */
 }
