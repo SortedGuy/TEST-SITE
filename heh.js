@@ -78,95 +78,13 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-    const submitButton = document.getElementById("submit-problem");
-    const problemInput = document.getElementById("problem-input");
-    const problemsList = document.getElementById("problems-list");
+document.getElementById('email-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
 
-    const encodedPassword = "bWF0ZW9r"; // "mateok" base64 encoded
-    const adminPassword = atob(encodedPassword);
-
-    // Function to get today's date in YYYY-MM-DD format
-    const getTodayDate = () => {
-        const today = new Date();
-        return today.toISOString().split('T')[0];
-    };
-
-    // Fetch and display problems from the server
-    const loadProblems = async () => {
-        const response = await fetch('http://localhost:5000/problems');
-        const problems = await response.json();
-
-        problemsList.innerHTML = problems.map((problem, index) => `
-            <div class="problem" data-id="${problem._id}" data-index="${index}">
-                <strong>Întrebare:</strong> ${problem.question}<br>
-                <strong>Răspuns:</strong> ${problem.response || 'În așteptare...'}<br>
-                <input type="password" class="password-input" placeholder="Introduceți parola pentru a răspunde..." />
-                <input type="text" class="response-input" placeholder="Scrieți răspunsul dumneavoastră..." />
-                <button class="submit-response">Trimite răspunsul</button>
-                <input type="password" class="delete-password-input" placeholder="Introduceți parola pentru a șterge..." />
-                <button class="delete-button">Șterge</button>
-            </div>
-        `).join('');
-    };
-
-    // Event delegation for response submission and problem deletion
-    problemsList.addEventListener('click', async function (event) {
-        const target = event.target;
-        const problemDiv = target.closest('.problem');
-        const problemId = problemDiv.getAttribute('data-id');
-
-        // Check if it's a submit-response button click
-        if (target.classList.contains('submit-response')) {
-            const passwordInput = problemDiv.querySelector('.password-input').value.trim();
-            const responseInput = problemDiv.querySelector('.response-input').value.trim();
-
-            if (passwordInput === adminPassword && responseInput) {
-                await fetch(`http://localhost:5000/problems/${problemId}`, {
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ response: responseInput }),
-                });
-                loadProblems();
-            } else {
-                alert("Parolă incorectă sau răspuns gol.");
-            }
-        }
-
-        // Check if it's a delete button click
-        if (target.classList.contains('delete-button')) {
-            const deletePasswordInput = problemDiv.querySelector('.delete-password-input').value.trim();
-
-            if (deletePasswordInput === adminPassword) {
-                await fetch(`http://localhost:5000/problems/${problemId}`, {
-                    method: 'DELETE',
-                });
-                loadProblems();
-            } else {
-                alert("Parolă incorectă pentru ștergere.");
-            }
-        }
-    });
-
-    // Submit a new problem to the server
-    submitButton.addEventListener("click", async function () {
-        const question = problemInput.value.trim();
-
-        if (question) {
-            await fetch('http://localhost:5000/problems', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ question, date: getTodayDate() }),
-            });
-            problemInput.value = '';
-            loadProblems();
-        }
-    });
-
-    // Initial load of problems
-    loadProblems();
+    emailjs.sendForm('service_7ytbwmb', 'template_fmikp0m', this)
+        .then(function() {
+            alert('Question sent successfully!');
+        }, function(error) {
+            alert('Failed to send question. Please try again later.');
+        });
 });
