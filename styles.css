@@ -923,97 +923,80 @@ button.prev-day, button.next-day {
 }
 
 
-#math-help {
-    padding: 20px;
-    background-color: #121212; /* Deep dark background */
+
+#email-form {
+    background-color: #1a1a2e; /* Darker form background */
+    padding: 25px;
     border-radius: 10px;
-    color: #eaeaea; /* Light gray text for contrast */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    font-family: 'Arial', sans-serif;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    max-width: 450px;
+    margin: 20px auto;
+    transition: transform 0.3s;
 }
 
-#problem-input {
+#email-form:hover {
+    transform: scale(1.02);
+}
+
+#email-form input[type="email"],
+#email-form textarea {
     width: 100%;
-    height: 60px; /* Reduced height */
-    padding: 10px;
-    border: none;
+    padding: 12px;
+    border: 1px solid #333; /* Darker border */
     border-radius: 5px;
-    background-color: #1e1e1e; /* Darker input background */
-    color: #ffffff; /* White text */
-    font-size: 16px; /* Slightly larger font size */
-    margin-bottom: 15px; /* More space below input */
+    margin-bottom: 15px;
+    background-color: #2e2e42; /* Input background */
+    color: #ffffff; /* Input text color */
+    font-size: 14px;
+    transition: border-color 0.3s;
 }
 
-.problem {
-    margin: 15px 0;
-    border: 1px solid #333; /* Subtle border */
-    padding: 15px; /* Increased padding for clarity */
+#email-form input[type="email"]:focus,
+#email-form textarea:focus {
+    border-color: #f39c12; /* Highlight border on focus */
+    outline: none; /* Remove default outline */
+}
+
+#email-form textarea {
+    resize: none; /* Prevents resizing */
+    height: 100px; /* Fixed height */
+}
+
+#email-form button {
+    background-color: #f39c12; /* Button color */
+    color: #ffffff; /* Button text color */
+    border: none;
+    padding: 12px 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#email-form button:hover {
+    background-color: #e67e22; /* Darker button color on hover */
+    transform: scale(1.05);
+}
+
+#questions-section {
+    margin-top: 20px;
+    background-color: #1a1a2e; /* Dark background for questions section */
+    padding: 20px;
     border-radius: 8px;
-    background-color: #1f1f1f; /* Darker problem background */
-    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-.problem:hover {
-    background-color: #2a2a2a; /* Highlight on hover */
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3); /* Shadow effect */
-}
-
-.response {
+#questions-list {
     margin-top: 10px;
-    padding: 10px;
-    background-color: #2a2a2a; /* Background for responses */
-    border-radius: 5px;
-    color: #f0f0f0; /* Light text */
+    color: #ffffff; /* Text color */
 }
 
-#submit-problem, .submit-response, .delete-button {
-    background-color: #007bff; /* Button color */
-    color: #ffffff; /* White text */
-    border: none;
-    border-radius: 6px; /* Rounded corners */
-    padding: 12px 20px; /* Spacing */
-    cursor: pointer; /* Pointer on hover */
-    transition: background-color 0.3s, transform 0.2s; /* Transition effects */
-    font-size: 16px; /* Text size */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Button shadow */
-    margin-top: 10px; /* Space above the button */
-    display: inline-block; /* Allow buttons to align properly */
+#questions-list p {
+    color: #999; /* Default message color */
 }
 
-#submit-problem:hover, .submit-response:hover, .delete-button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-    transform: translateY(-1px); /* Slight lift effect */
+#questions-list p.no-questions {
+    color: #f39c12; /* Highlight color for no questions message */
+    font-style: italic; /* Italicize the message */
 }
-
-.password-input, .response-input, .delete-password-input {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #1e1e1e; /* Darker input background */
-    color: #ffffff; /* White text */
-    font-size: 16px; /* Slightly larger font size */
-    margin-top: 5px;
-}
-
-.password-input:focus, .response-input:focus, .delete-password-input:focus {
-    background-color: #2a2a2a; /* Darker on focus */
-    outline: none;
-}
-
-h2 {
-    margin-bottom: 10px;
-    font-size: 22px; /* Slightly larger heading size */
-    color: #ffffff; /* White text */
-}
-
-h3 {
-    color: #f0f0f0; /* Lighter color for subheadings */
-    margin-top: 10px;
-}
-
-hr {
-    border: 1px solid #444; /* Darker color for horizontal rule */
-    margin: 15px 0; /* More space above and below */
-}
-
