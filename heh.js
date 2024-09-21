@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const submitButton = document.getElementById("submit-problem");
     const problemInput = document.getElementById("problem-input");
     const problemsList = document.getElementById("problems-list");
@@ -98,69 +98,60 @@ document.addEventListener("DOMContentLoaded", function() {
         const problems = await response.json();
 
         problemsList.innerHTML = problems.map((problem, index) => `
-            <div class="problem">
+            <div class="problem" data-id="${problem._id}" data-index="${index}">
                 <strong>Întrebare:</strong> ${problem.question}<br>
                 <strong>Răspuns:</strong> ${problem.response || 'În așteptare...'}<br>
                 <input type="password" class="password-input" placeholder="Introduceți parola pentru a răspunde..." />
-                <input type="text" class="response-input" placeholder="Scrieți răspunsul dumneavoastră..." data-index="${index}" />
+                <input type="text" class="response-input" placeholder="Scrieți răspunsul dumneavoastră..." />
                 <button class="submit-response">Trimite răspunsul</button>
                 <input type="password" class="delete-password-input" placeholder="Introduceți parola pentru a șterge..." />
-                <button class="delete-button" data-index="${index}">Șterge</button>
+                <button class="delete-button">Șterge</button>
             </div>
         `).join('');
-
-        attachEventListeners(problems);
     };
 
-    // Attach event listeners for submitting and deleting responses
-    const attachEventListeners = (problems) => {
-        const responseButtons = document.querySelectorAll('.submit-response');
-        responseButtons.forEach(button => {
-            button.addEventListener('click', async function() {
-                const index = this.previousElementSibling.dataset.index;
-                const responseInput = this.previousElementSibling;
-                const passwordInput = this.previousElementSibling.previousElementSibling;
-                const response = responseInput.value.trim();
-                const enteredPassword = passwordInput.value.trim();
+    // Event delegation for response submission and problem deletion
+    problemsList.addEventListener('click', async function (event) {
+        const target = event.target;
+        const problemDiv = target.closest('.problem');
+        const problemId = problemDiv.getAttribute('data-id');
 
-                if (enteredPassword === adminPassword && response) {
-                    const problemId = problems[index]._id;
-                    await fetch(`http://localhost:5000/problems/${problemId}`, {
-                        method: 'PATCH',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ response }),
-                    });
-                    loadProblems();
-                } else {
-                    alert("Parolă incorectă sau răspuns gol.");
-                }
-            });
-        });
+        // Check if it's a submit-response button click
+        if (target.classList.contains('submit-response')) {
+            const passwordInput = problemDiv.querySelector('.password-input').value.trim();
+            const responseInput = problemDiv.querySelector('.response-input').value.trim();
 
-        const deleteButtons = document.querySelectorAll('.delete-button');
-        deleteButtons.forEach(button => {
-            button.addEventListener('click', async function() {
-                const index = this.dataset.index;
-                const deletePasswordInput = this.previousElementSibling;
-                const enteredPassword = deletePasswordInput.value.trim();
+            if (passwordInput === adminPassword && responseInput) {
+                await fetch(`http://localhost:5000/problems/${problemId}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ response: responseInput }),
+                });
+                loadProblems();
+            } else {
+                alert("Parolă incorectă sau răspuns gol.");
+            }
+        }
 
-                if (enteredPassword === adminPassword) {
-                    const problemId = problems[index]._id;
-                    await fetch(`http://localhost:5000/problems/${problemId}`, {
-                        method: 'DELETE',
-                    });
-                    loadProblems();
-                } else {
-                    alert("Parolă incorectă pentru ștergere.");
-                }
-            });
-        });
-    };
+        // Check if it's a delete button click
+        if (target.classList.contains('delete-button')) {
+            const deletePasswordInput = problemDiv.querySelector('.delete-password-input').value.trim();
+
+            if (deletePasswordInput === adminPassword) {
+                await fetch(`http://localhost:5000/problems/${problemId}`, {
+                    method: 'DELETE',
+                });
+                loadProblems();
+            } else {
+                alert("Parolă incorectă pentru ștergere.");
+            }
+        }
+    });
 
     // Submit a new problem to the server
-    submitButton.addEventListener("click", async function() {
+    submitButton.addEventListener("click", async function () {
         const question = problemInput.value.trim();
 
         if (question) {
