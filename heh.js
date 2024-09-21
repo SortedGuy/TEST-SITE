@@ -78,4 +78,102 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    const submitButton = document.getElementById("submit-problem");
+    const problemInput = document.getElementById("problem-input");
+    const problemsList = document.getElementById("problems-list");
 
+   
+    const encodedPassword = "bWF0ZW9r"; 
+    const adminPassword = atob(encodedPassword); 
+
+    // Function to get today's date in YYYY-MM-DD format
+    const getTodayDate = () => {
+        const today = new Date();
+        return today.toISOString().split('T')[0];
+    };
+
+    // Load existing problems from local storage
+    const loadProblems = () => {
+        const problems = JSON.parse(localStorage.getItem("problems")) || [];
+        const today = getTodayDate();
+
+        // Filter problems submitted today
+        const todayProblems = problems.filter(problem => problem.date === today);
+        
+        problemsList.innerHTML = todayProblems.map((problem, index) => `
+            <div class="problem">
+                <strong>Question:</strong> ${problem.question}<br>
+                <strong>Response:</strong> ${problem.response || 'Pending...'}<br>
+                <input type="password" class="password-input" placeholder="Enter password to respond..." />
+                <input type="text" class="response-input" placeholder="Type your response..." data-index="${index}" />
+                <button class="submit-response">Submit Response</button>
+                <input type="password" class="delete-password-input" placeholder="Enter password to delete..." />
+                <button class="delete-button" data-index="${index}">Delete</button>
+            </div>
+        `).join('');
+
+        // Add event listeners for response submission and deletion
+        const responseButtons = document.querySelectorAll('.submit-response');
+        responseButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const index = this.previousElementSibling.dataset.index;
+                const responseInput = this.previousElementSibling;
+                const passwordInput = this.previousElementSibling.previousElementSibling;
+                const response = responseInput.value.trim();
+                const enteredPassword = passwordInput.value.trim();
+
+                // Check if the entered password is correct
+                if (enteredPassword === adminPassword && response) {
+                    const problems = JSON.parse(localStorage.getItem("problems"));
+                    problems[index].response = response;
+                    localStorage.setItem("problems", JSON.stringify(problems));
+                    loadProblems(); // Refresh the list
+                } else {
+                    alert("Incorrect password or empty response.");
+                }
+            });
+        });
+
+        const deleteButtons = document.querySelectorAll('.delete-button');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const index = this.dataset.index;
+                const deletePasswordInput = this.previousElementSibling;
+                const enteredPassword = deletePasswordInput.value.trim();
+
+                // Check if the entered password is correct
+                if (enteredPassword === adminPassword) {
+                    const problems = JSON.parse(localStorage.getItem("problems"));
+                    problems.splice(index, 1); // Remove the problem
+                    localStorage.setItem("problems", JSON.stringify(problems));
+                    loadProblems(); // Refresh the list
+                } else {
+                    alert("Incorrect password for deletion.");
+                }
+            });
+        });
+    };
+
+    // Save problem
+    submitButton.addEventListener("click", function() {
+        const question = problemInput.value.trim();
+        const today = getTodayDate();
+        const problems = JSON.parse(localStorage.getItem("problems")) || [];
+        const todayProblemsCount = problems.filter(problem => problem.date === today).length;
+
+        if (todayProblemsCount < 5) {
+            if (question) {
+                problems.push({ question: question, response: '', date: today });
+                localStorage.setItem("problems", JSON.stringify(problems));
+                problemInput.value = ''; // Clear input
+                loadProblems(); // Refresh the list
+            }
+        } else {
+            alert("You can only submit 5 questions per day.");
+        }
+    });
+
+    // Initial load of problems
+    loadProblems();
+});
