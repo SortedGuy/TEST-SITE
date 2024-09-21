@@ -871,11 +871,46 @@ button.prev-day, button.next-day {
     .exercise-description,
     .exercise-content,
     .exercise-explanation {
-        font-size: 9px; /* Adjust font size for smaller screens */
+        font-size: 14px; /* Adjust font size for smaller screens */
     }
 
     .math-expression {
-        font-size: 9px; /* Adjust font size for smaller screens */
+        font-size: 14px; /* Adjust font size for smaller screens */
     }
 }
 
+
+.collapsible {
+    background-color: #1a1a1a; /* Dark background for the button */
+    color: #fff; /* White text color */
+    cursor: pointer;
+    padding: 8px; /* Smaller padding for a more compact button */
+    border: none;
+    text-align: center; /* Center align text */
+    outline: none;
+    font-size: 14px; /* Smaller font size */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    width: 200px; /* Fixed width for a consistent button size */
+    margin: 10px auto; /* Center the button horizontally */
+}
+
+.collapsible:hover {
+    background-color: #333; /* Darker shade on hover */
+}
+
+.content {
+    padding: 15px; /* Padding for content */
+    display: none; /* Hidden by default */
+    background-color: #2e2e2e; /* Darker background for the content */
+    border-radius: 5px; /* Rounded corners */
+    color: #fff; /* White text color */
+    margin-top: 5px; /* Spacing between button and content */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+}
+
+hr {
+    border: 0; /* Remove default border */
+    border-top: 1px solid #444; /* Add a top border with a dark color */
+    margin: 15px 0; /* Margin above and below the line */
+}
