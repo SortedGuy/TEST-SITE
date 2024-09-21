@@ -86,12 +86,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const encodedPassword = "bWF0ZW9r"; 
     const adminPassword = atob(encodedPassword); 
 
-    // Function to get today's date in YYYY-MM-DD format
-    const getTodayDate = () => {
-        const today = new Date();
-        return today.toISOString().split('T')[0];
-    };
-
     // Load existing problems from local storage
     const loadProblems = () => {
         const problems = JSON.parse(localStorage.getItem("problems")) || [];
@@ -154,19 +148,27 @@ document.addEventListener("DOMContentLoaded", function() {
     submitButton.addEventListener("click", function() {
         const question = problemInput.value.trim();
         const problems = JSON.parse(localStorage.getItem("problems")) || [];
-        const todayProblemsCount = problems.filter(problem => problem.date === getTodayDate()).length;
+        
+        if (question) {
+            // Check if the user has submitted less than 5 questions today
+            const todayProblemsCount = problems.filter(problem => problem.date === getTodayDate()).length;
 
-        if (todayProblemsCount < 5) {
-            if (question) {
+            if (todayProblemsCount < 5) {
                 problems.push({ question: question, response: '', date: getTodayDate() });
                 localStorage.setItem("problems", JSON.stringify(problems));
                 problemInput.value = ''; // Clear input
                 loadProblems(); // Refresh the list
+            } else {
+                alert("Puteți trimite doar 5 întrebări pe zi.");
             }
-        } else {
-            alert("Puteți trimite doar 5 întrebări pe zi.");
         }
     });
+
+    // Function to get today's date in YYYY-MM-DD format
+    const getTodayDate = () => {
+        const today = new Date();
+        return today.toISOString().split('T')[0];
+    };
 
     // Initial load of problems
     loadProblems();
