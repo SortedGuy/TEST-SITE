@@ -83,10 +83,16 @@ document.addEventListener("DOMContentLoaded", function() {
     const problemInput = document.getElementById("problem-input");
     const problemsList = document.getElementById("problems-list");
 
-    const encodedPassword = "bWF0ZW9r"; 
-    const adminPassword = atob(encodedPassword); 
+    const encodedPassword = "bWF0ZW9r"; // "mateok" base64 encoded
+    const adminPassword = atob(encodedPassword);
 
-    // Load existing problems from the server
+    // Function to get today's date in YYYY-MM-DD format
+    const getTodayDate = () => {
+        const today = new Date();
+        return today.toISOString().split('T')[0];
+    };
+
+    // Fetch and display problems from the server
     const loadProblems = async () => {
         const response = await fetch('http://localhost:5000/problems');
         const problems = await response.json();
@@ -103,7 +109,11 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
         `).join('');
 
-        // Attach event listeners for response submission and deletion
+        attachEventListeners(problems);
+    };
+
+    // Attach event listeners for submitting and deleting responses
+    const attachEventListeners = (problems) => {
         const responseButtons = document.querySelectorAll('.submit-response');
         responseButtons.forEach(button => {
             button.addEventListener('click', async function() {
@@ -114,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 const enteredPassword = passwordInput.value.trim();
 
                 if (enteredPassword === adminPassword && response) {
-                    const problemId = problems[index]._id; // Get the ID of the problem
+                    const problemId = problems[index]._id;
                     await fetch(`http://localhost:5000/problems/${problemId}`, {
                         method: 'PATCH',
                         headers: {
@@ -122,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         },
                         body: JSON.stringify({ response }),
                     });
-                    loadProblems(); // Refresh the list
+                    loadProblems();
                 } else {
                     alert("Parolă incorectă sau răspuns gol.");
                 }
@@ -137,11 +147,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 const enteredPassword = deletePasswordInput.value.trim();
 
                 if (enteredPassword === adminPassword) {
-                    const problemId = problems[index]._id; // Get the ID of the problem
+                    const problemId = problems[index]._id;
                     await fetch(`http://localhost:5000/problems/${problemId}`, {
                         method: 'DELETE',
                     });
-                    loadProblems(); // Refresh the list
+                    loadProblems();
                 } else {
                     alert("Parolă incorectă pentru ștergere.");
                 }
@@ -149,12 +159,11 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     };
 
-    // Save problem
+    // Submit a new problem to the server
     submitButton.addEventListener("click", async function() {
         const question = problemInput.value.trim();
 
         if (question) {
-            // Send the problem to the server
             await fetch('http://localhost:5000/problems', {
                 method: 'POST',
                 headers: {
@@ -162,16 +171,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 },
                 body: JSON.stringify({ question, date: getTodayDate() }),
             });
-            problemInput.value = ''; // Clear input
-            loadProblems(); // Refresh the list
+            problemInput.value = '';
+            loadProblems();
         }
     });
-
-    // Function to get today's date in YYYY-MM-DD format
-    const getTodayDate = () => {
-        const today = new Date();
-        return today.toISOString().split('T')[0];
-    };
 
     // Initial load of problems
     loadProblems();
