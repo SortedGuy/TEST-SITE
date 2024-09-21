@@ -881,43 +881,139 @@ button.prev-day, button.next-day {
 
 /* Collapsible Button Style */
 .collapsible {
-    background-color: #5a5a5a; 
-    color: white;             
-    cursor: pointer;          
-    padding: 8px 16px;     
-    width: auto;              
-    margin: 10px auto;        
-    border: none;            
-    text-align: center;      
-    outline: none;           
-    font-size: 14px;        
-    border-radius: 5px;       
-    transition: background-color 0.3s, transform 0.2s; 
+    background-color: #5a5a5a; /* Slightly lighter background */
+    color: white;              /* White text */
+    cursor: pointer;           /* Pointer cursor on hover */
+    padding: 8px 16px;        /* Padding for the button */
+    width: auto;               /* Auto width for smaller buttons */
+    margin: 10px auto;        /* Center the button with margin */
+    border: none;             /* No border */
+    text-align: center;       /* Center text */
+    outline: none;            /* No outline */
+    font-size: 14px;          /* Slightly smaller font size */
+    border-radius: 5px;       /* Rounded corners */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
 }
 
 .collapsible:hover {
-    background-color: #6a6a6a; 
-    transform: scale(1.05);    
+    background-color: #6a6a6a; /* Lighter background on hover */
+    transform: scale(1.05);    /* Slight scale effect on hover */
 }
 
 /* Content Style */
 .exercise-content {
-    padding: 15px;             
-    display: none;             
-    overflow: hidden;         
-    background-color: #222;    
-    color: white;              
-    border: 1px solid #444;    
-    border-radius: 5px;      
-    margin: 10px auto;        
-    max-width: 800px;         
+    padding: 15px;             /* Padding inside the content */
+    display: none;             /* Hidden by default */
+    overflow: hidden;          /* Hide overflow */
+    background-color: #222;    /* Darker background for content */
+    color: white;              /* White text */
+    border: 1px solid #444;    /* Border for separation */
+    border-radius: 5px;        /* Rounded corners */
+    margin: 10px auto;        /* Center the content block */
+    max-width: 800px;         /* Max width for content */
 }
 
 /* Math Expressions Style */
 .math-expression {
-    font-family: 'Courier New', monospace; 
-    background-color: #333; 
-    padding: 5px;          
-    border-radius: 5px;    
-    display: inline-block;  
+    font-family: 'Courier New', monospace; /* Monospace font for math expressions */
+    background-color: #333; /* Background for better visibility */
+    padding: 5px;          /* Padding around the expression */
+    border-radius: 5px;    /* Rounded corners */
+    display: inline-block;  /* Make it inline */
 }
+
+
+#math-help {
+    padding: 20px;
+    background-color: #121212; /* Deep dark background */
+    border-radius: 10px;
+    color: #eaeaea; /* Light gray text for contrast */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    font-family: 'Arial', sans-serif;
+}
+
+#problem-input {
+    width: 100%;
+    height: 60px; /* Reduced height */
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1e1e1e; /* Darker input background */
+    color: #ffffff; /* White text */
+    font-size: 16px; /* Slightly larger font size */
+    margin-bottom: 15px; /* More space below input */
+}
+
+.problem {
+    margin: 15px 0;
+    border: 1px solid #333; /* Subtle border */
+    padding: 15px; /* Increased padding for clarity */
+    border-radius: 8px;
+    background-color: #1f1f1f; /* Darker problem background */
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.problem:hover {
+    background-color: #2a2a2a; /* Highlight on hover */
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3); /* Shadow effect */
+}
+
+.response {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #2a2a2a; /* Background for responses */
+    border-radius: 5px;
+    color: #f0f0f0; /* Light text */
+}
+
+#submit-problem, .submit-response, .delete-button {
+    background-color: #007bff; /* Button color */
+    color: #ffffff; /* White text */
+    border: none;
+    border-radius: 6px; /* Rounded corners */
+    padding: 12px 20px; /* Spacing */
+    cursor: pointer; /* Pointer on hover */
+    transition: background-color 0.3s, transform 0.2s; /* Transition effects */
+    font-size: 16px; /* Text size */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Button shadow */
+    margin-top: 10px; /* Space above the button */
+    display: inline-block; /* Allow buttons to align properly */
+}
+
+#submit-problem:hover, .submit-response:hover, .delete-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-1px); /* Slight lift effect */
+}
+
+.password-input, .response-input, .delete-password-input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1e1e1e; /* Darker input background */
+    color: #ffffff; /* White text */
+    font-size: 16px; /* Slightly larger font size */
+    margin-top: 5px;
+}
+
+.password-input:focus, .response-input:focus, .delete-password-input:focus {
+    background-color: #2a2a2a; /* Darker on focus */
+    outline: none;
+}
+
+h2 {
+    margin-bottom: 10px;
+    font-size: 22px; /* Slightly larger heading size */
+    color: #ffffff; /* White text */
+}
+
+h3 {
+    color: #f0f0f0; /* Lighter color for subheadings */
+    margin-top: 10px;
+}
+
+hr {
+    border: 1px solid #444; /* Darker color for horizontal rule */
+    margin: 15px 0; /* More space above and below */
+}
+
