@@ -38,27 +38,39 @@ updateCountdown();
 
 
 
-
 document.addEventListener('DOMContentLoaded', function() {
     const popup = document.getElementById('popup');
-    const closeButton = document.querySelector('.close-btn');
+    const closeButton = document.querySelector('.close-btn'); // Selecting by class
 
-   
-    popup.style.display = 'block';
-
-
-    closeButton.addEventListener('click', function() {
-        popup.style.display = 'none';
-    });
-
-  
+    // Show the popup when the page loads if it hasn't been closed before
     if (!localStorage.getItem('popupClosed')) {
         popup.style.display = 'block';
     }
 
     closeButton.addEventListener('click', function() {
+        // Hide the popup
         popup.style.display = 'none';
+        // Save the state in localStorage
         localStorage.setItem('popupClosed', 'true');
+        // Scroll to the math section
+        const mathSection = document.getElementById('test-help');
+        if (mathSection) {
+            mathSection.scrollIntoView({ behavior: 'smooth' });
+        }
     });
 });
 
+
+
+var coll = document.getElementsByClassName("collapsible");
+for (let i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+            content.style.display = "none";
+        } else {
+            content.style.display = "block";
+        }
+    });
+}
