@@ -86,10 +86,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const encodedPassword = "bWF0ZW9r"; 
     const adminPassword = atob(encodedPassword); 
 
-    // Load existing problems from local storage
-    const loadProblems = () => {
-        const problems = JSON.parse(localStorage.getItem("problems")) || [];
-        
+    // Load existing problems from the server
+    const loadProblems = async () => {
+        const response = await fetch('http://localhost:5000/problems');
+        const problems = await response.json();
+
         problemsList.innerHTML = problems.map((problem, index) => `
             <div class="problem">
                 <strong>Întrebare:</strong> ${problem.question}<br>
@@ -102,21 +103,25 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
         `).join('');
 
-        // Add event listeners for response submission and deletion
+        // Attach event listeners for response submission and deletion
         const responseButtons = document.querySelectorAll('.submit-response');
         responseButtons.forEach(button => {
-            button.addEventListener('click', function() {
+            button.addEventListener('click', async function() {
                 const index = this.previousElementSibling.dataset.index;
                 const responseInput = this.previousElementSibling;
                 const passwordInput = this.previousElementSibling.previousElementSibling;
                 const response = responseInput.value.trim();
                 const enteredPassword = passwordInput.value.trim();
 
-                // Check if the entered password is correct
                 if (enteredPassword === adminPassword && response) {
-                    const problems = JSON.parse(localStorage.getItem("problems"));
-                    problems[index].response = response;
-                    localStorage.setItem("problems", JSON.stringify(problems));
+                    const problemId = problems[index]._id; // Get the ID of the problem
+                    await fetch(`http://localhost:5000/problems/${problemId}`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ response }),
+                    });
                     loadProblems(); // Refresh the list
                 } else {
                     alert("Parolă incorectă sau răspuns gol.");
@@ -126,16 +131,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const deleteButtons = document.querySelectorAll('.delete-button');
         deleteButtons.forEach(button => {
-            button.addEventListener('click', function() {
+            button.addEventListener('click', async function() {
                 const index = this.dataset.index;
                 const deletePasswordInput = this.previousElementSibling;
                 const enteredPassword = deletePasswordInput.value.trim();
 
-                // Check if the entered password is correct
                 if (enteredPassword === adminPassword) {
-                    const problems = JSON.parse(localStorage.getItem("problems"));
-                    problems.splice(index, 1); // Remove the problem
-                    localStorage.setItem("problems", JSON.stringify(problems));
+                    const problemId = problems[index]._id; // Get the ID of the problem
+                    await fetch(`http://localhost:5000/problems/${problemId}`, {
+                        method: 'DELETE',
+                    });
                     loadProblems(); // Refresh the list
                 } else {
                     alert("Parolă incorectă pentru ștergere.");
@@ -145,22 +150,20 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     // Save problem
-    submitButton.addEventListener("click", function() {
+    submitButton.addEventListener("click", async function() {
         const question = problemInput.value.trim();
-        const problems = JSON.parse(localStorage.getItem("problems")) || [];
-        
-        if (question) {
-            // Check if the user has submitted less than 5 questions today
-            const todayProblemsCount = problems.filter(problem => problem.date === getTodayDate()).length;
 
-            if (todayProblemsCount < 5) {
-                problems.push({ question: question, response: '', date: getTodayDate() });
-                localStorage.setItem("problems", JSON.stringify(problems));
-                problemInput.value = ''; // Clear input
-                loadProblems(); // Refresh the list
-            } else {
-                alert("Puteți trimite doar 5 întrebări pe zi.");
-            }
+        if (question) {
+            // Send the problem to the server
+            await fetch('http://localhost:5000/problems', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ question, date: getTodayDate() }),
+            });
+            problemInput.value = ''; // Clear input
+            loadProblems(); // Refresh the list
         }
     });
 
