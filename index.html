@@ -381,27 +381,30 @@
             Desfacem formula folosind regula: \((a+b)(a-b) = a^2 - b^2\).
         </div>
     </section>
-    <section id="math-help">
-        <h1>nu merge kkt asta</h1>
-        <p class="tips"><h3>Sfaturi:</h3> 
-            - Pentru fracții, ca \( \frac{5}{2} \), scrieți <code>5/2</code>.<br>
-            - Pentru puteri, ca \( 5^2 \), scrieți <code>5^2</code>.<br>
-            - Pentru radicali, ca \( \sqrt{5} \), scrieți <code>V5</code>.<br>
-            - Dacă aveți expresii mari, cum ar fi \( 2 \frac{5}{2} \), scrieți <code>2*(5/2)</code> pentru claritate.<br>
-            - Folosiți paranteze pentru a grupa expresii, de exemplu: <code>(1*5)/(2+3)</code>, care ar arăta ca \( \frac{1 \times 5}{2 + 3} \).<br>
-            - Pentru înmulțire, folosiți <code>5*2</code>  pentru claritate.<br>
-            - Pentru adunare și scădere, folosiți <code>5+2</code> și <code>5-2</code> respectiv.
-        </p>
-        <h3>Sau doar scrie ce ex din carte / caiet de teste</h3>
-        <textarea id="problem-input" placeholder="Scrie problema ta de matematică aici..."></textarea>
-        <button id="submit-problem">Trimite</button>
-        
-        <h2>Probleme Trimise</h2>
-        <div id="problems-list"></div>
-    </section>
+    <form id="email-form">
+        <h3>Rezolvarea temei p/u acasa la mate</h3>
+        <p>(Poti sa intrebi de ex: Cum se rezolva ex 6 p)</p>
+        <p>Voi incerca sa raspund in curs de 2-4 ore</p>
+        <textarea name="message" placeholder="Your Question" required></textarea>
+        <button type="submit">Trimite intrebare</button>
+    </form>
+    
+    <form id="email-form">
+        <h3>Raspunsuri</h3>
+        <div id="email-form">
+            <p>Nimeni nu a adresat o întrebare încă.</p> <!-- Default message -->
+        </div>
+    </form>
     
     
     
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script type="text/javascript">
+    (function(){
+        emailjs.init("Mdy_j7yfWeUC5fKSr"); // Replace with your EmailJS user ID
+    })();
+</script>
+
   
 
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
